@@ -1,0 +1,7 @@
+{
+    "sketch": "nfc_42_reader.ino",
+    "board": "arduino:megaavr:uno2018",
+    "configuration": "mode=on",
+    "port": "/dev/tty.usbmodem11102",
+    "programmer": "medbg"
+}
