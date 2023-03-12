@@ -3,7 +3,7 @@
     "configurations": [
         {
             "name": "Arduino",
-            "compilerPath": "/Users/aitoraudicana/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/bin/avr-g++",
+            "compilerPath": "/Users/ailopez-/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/bin/avr-g++",
             "compilerArgs": [
                 "-w",
                 "-std=gnu++11",
@@ -16,20 +16,20 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino/api/deprecated",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/variants/uno2018",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/libraries/Wire/src",
-                "/Users/aitoraudicana/Documents/Arduino/libraries/LiquidCrystal_I2C",
-                "/Users/aitoraudicana/Documents/Arduino/libraries/PN532_I2C",
-                "/Users/aitoraudicana/Documents/Arduino/libraries/PN532",
-                "/Users/aitoraudicana/Documents/Arduino/libraries/NDEF",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/lib/gcc/avr/7.3.0/include",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/lib/gcc/avr/7.3.0/include-fixed",
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/avr/include"
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino/api/deprecated",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/variants/uno2018",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/libraries/Wire/src",
+                "/Users/ailopez-/Documents/Arduino/libraries/LiquidCrystal_I2C",
+                "/Users/ailopez-/Documents/Arduino/libraries/PN532_I2C",
+                "/Users/ailopez-/Documents/Arduino/libraries/PN532",
+                "/Users/ailopez-/Documents/Arduino/libraries/NDEF",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/lib/gcc/avr/7.3.0/include",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/lib/gcc/avr/7.3.0/include-fixed",
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino5/avr/include"
             ],
             "forcedInclude": [
-                "/Users/aitoraudicana/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino/Arduino.h"
+                "/Users/ailopez-/Library/Arduino15/packages/arduino/hardware/megaavr/1.8.8/cores/arduino/Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++11",
