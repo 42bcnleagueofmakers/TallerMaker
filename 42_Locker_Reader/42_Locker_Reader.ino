@@ -26,6 +26,8 @@
 #include <Wire.h>
 #include <SPI.h>
 #include <Adafruit_PN532.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
 
 // If using the breakout with SPI, define the pins for SPI communication.
 #define PN532_SCK  (2)
@@ -52,16 +54,22 @@
 
 // Or use this line for a breakout or shield with an I2C connection:
 Adafruit_PN532 nfc(PN532_IRQ, PN532_RESET);
+//Crear el objeto lcd  dirección  0x3F y 16 columnas x 2 filas
+LiquidCrystal_I2C lcd(0x27,16,2);  //
 
 void setup(void) {
+
+  delay(1000);
+  // Inicializar el LCD
+  lcd.init();
+  //Encender la luz de fondo.
+  lcd.backlight();
   // has to be fast to dump the entire memory contents!
   Serial.begin(115200);
   while (!Serial) delay(10); // for Leonardo/Micro/Zero
-
   Serial.println("Looking for PN532...");
-
+  delay(200);
   nfc.begin();
-
   uint32_t versiondata = nfc.getFirmwareVersion();
   if (! versiondata) {
     Serial.print("Didn't find PN53x board");
@@ -73,6 +81,13 @@ void setup(void) {
   Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
 
   Serial.println("Waiting for an ISO14443A Card ...");
+  pinMode(8, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
+  // Escribimos el Mensaje en el LCD.
+  lcd.print("#LeagueOfMakers");
+  lcd.setCursor(0, 2);
+  lcd.print("Starting...");
+  delay(200);
 }
 
 
@@ -88,8 +103,8 @@ void loop(void) {
   //uint8_t keyuniversal[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
   uint8_t keyuniversal[6] = { 0x44, 0x6F, 0x72, 0x6C, 0x65, 0x74 };
   
-  //uint8_t keyuniversal[6] = { 0x44, 0x6F, 0x72, 0x6C, 0x65, 0x74 };
-
+  delay(1000);
+  lcd.noBacklight();
 
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
   // 'uid' will be populated with the UID, and uidLength will indicate
@@ -98,12 +113,13 @@ void loop(void) {
 
   if (success) {
     // Display some basic information about the card
+    Serial.println("");
     Serial.println("Found an ISO14443A card");
     Serial.print("  UID Length: ");Serial.print(uidLength, DEC);Serial.println(" bytes");
     Serial.print("  UID Value: ");
     nfc.PrintHex(uid, uidLength);
     Serial.println("");
-
+    lcd.backlight();
     if (uidLength == 4)
     {
       // We probably have a Mifare Classic card ...
@@ -170,6 +186,10 @@ void loop(void) {
             // Dump the raw data
             nfc.PrintHexChar(data, 16);
             Serial.print("Your Locker: "); Serial.print(data[3], DEC);
+            lcd.setCursor(0, 2);
+            lcd.print("Your Locker >> ...");
+            char  buffer[3];
+            lcd.print(itoa(data[3], &buffer[0], 10));
           }
           else
           {
@@ -186,6 +206,8 @@ void loop(void) {
     }
   }
   delay(2000);
+  lcd.noBacklight();
+   delay(200);
   // Wait a bit before trying again
   // Serial.println("\n\nSend a character to run the mem dumper again!");
   // Serial.flush();
