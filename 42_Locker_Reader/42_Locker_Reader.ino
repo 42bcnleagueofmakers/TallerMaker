@@ -187,9 +187,18 @@ void loop(void) {
             nfc.PrintHexChar(data, 16);
             Serial.print("Your Locker: "); Serial.print(data[3], DEC);
             lcd.setCursor(0, 2);
-            lcd.print("Your Locker >> ...");
-            char  buffer[3];
-            lcd.print(itoa(data[3], &buffer[0], 10));
+            lcd.print("Your Locker >>       ");
+            char  buffer[20];
+            if (data[3] == 255)
+            {
+              lcd.setCursor(15, 2);
+              lcd.print("empty");
+            }
+            else
+            {
+              lcd.setCursor(15, 2);
+              lcd.print(itoa(data[3], buffer, 10));
+            }
           }
           else
           {
