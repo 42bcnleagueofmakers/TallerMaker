@@ -186,6 +186,8 @@ void loop(void) {
             // Dump the raw data
             nfc.PrintHexChar(data, 16);
             Serial.print("Your Locker: "); Serial.print(data[3], DEC);
+            lcd.setCursor(0, 0);
+            lcd.print("#LeagueOfMakers");
             lcd.setCursor(0, 2);
             lcd.print("Your Locker >>       ");
             char  buffer[20];
@@ -215,8 +217,9 @@ void loop(void) {
     }
   }
   delay(2000);
+  lcd.clear();
   lcd.noBacklight();
-   delay(200);
+  delay(200);
   // Wait a bit before trying again
   // Serial.println("\n\nSend a character to run the mem dumper again!");
   // Serial.flush();
