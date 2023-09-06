@@ -66,19 +66,21 @@ void setup(void) {
   lcd.backlight();
   // has to be fast to dump the entire memory contents!
   Serial.begin(115200);
-  while (!Serial) delay(10); // for Leonardo/Micro/Zero
+  //while (!Serial) delay(10); // for Leonardo/Micro/Zero
   Serial.println("Looking for PN532...");
   delay(200);
   nfc.begin();
-  uint32_t versiondata = nfc.getFirmwareVersion();
-  if (! versiondata) {
-    Serial.print("Didn't find PN53x board");
-    while (1); // halt
-  }
-  // Got ok data, print it out!
-  Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
-  Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
-  Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
+  // uint32_t versiondata = nfc.getFirmwareVersion();
+  // while (!versiondata) {
+  //   Serial.print("Didn't find PN53x board");
+  //   lcd.print("Didn't find PN53x board");
+  //   //while (1); // halt
+  //   uint32_t versiondata = nfc.getFirmwareVersion();
+  // }
+  // //Got ok data, print it out!
+  // Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
+  // Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
+  // Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
 
   Serial.println("Waiting for an ISO14443A Card ...");
   pinMode(8, OUTPUT);
@@ -102,8 +104,9 @@ void loop(void) {
   // Keyb on NDEF and Mifare Classic should be the same
   //uint8_t keyuniversal[6] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
   uint8_t keyuniversal[6] = { 0x44, 0x6F, 0x72, 0x6C, 0x65, 0x74 };
-  
-  delay(1000);
+    // Inicializar el LCD
+  delay(500);
+  lcd.clear();
   lcd.noBacklight();
 
   // Wait for an ISO14443A type cards (Mifare, etc.).  When one is found
@@ -174,7 +177,8 @@ void loop(void) {
           if (success)
           {
             // Read successful
-            Serial.print("Block ");Serial.print(currentblock, DEC);
+            Serial.print("Block ");
+            Serial.print(currentblock, DEC);
             if (currentblock < 10)
             {
               Serial.print("  ");
@@ -186,6 +190,7 @@ void loop(void) {
             // Dump the raw data
             nfc.PrintHexChar(data, 16);
             Serial.print("Your Locker: "); Serial.print(data[3], DEC);
+            lcd.backlight();
             lcd.setCursor(0, 0);
             lcd.print("#LeagueOfMakers");
             lcd.setCursor(0, 2);
@@ -201,6 +206,9 @@ void loop(void) {
               lcd.setCursor(15, 2);
               lcd.print(itoa(data[3], buffer, 10));
             }
+              delay(2000);
+              lcd.clear();
+              lcd.noBacklight();
           }
           else
           {
@@ -216,10 +224,8 @@ void loop(void) {
       Serial.println("Ooops ... this doesn't seem to be a Mifare Classic card!");
     }
   }
-  delay(2000);
-  lcd.clear();
-  lcd.noBacklight();
-  delay(200);
+
+  // delay(200);
   // Wait a bit before trying again
   // Serial.println("\n\nSend a character to run the mem dumper again!");
   // Serial.flush();
