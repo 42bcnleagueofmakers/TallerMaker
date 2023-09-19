@@ -68,9 +68,10 @@ void setup(void) {
   Serial.begin(115200);
   //while (!Serial) delay(10); // for Leonardo/Micro/Zero
   Serial.println("Looking for PN532...");
+  lcd.print("#Booting");
   delay(200);
   nfc.begin();
-  // uint32_t versiondata = nfc.getFirmwareVersion();
+  uint32_t versiondata = nfc.getFirmwareVersion();
   // while (!versiondata) {
   //   Serial.print("Didn't find PN53x board");
   //   lcd.print("Didn't find PN53x board");
@@ -78,9 +79,9 @@ void setup(void) {
   //   uint32_t versiondata = nfc.getFirmwareVersion();
   // }
   // //Got ok data, print it out!
-  // Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
-  // Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
-  // Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
+  Serial.print("Found chip PN5"); Serial.println((versiondata>>24) & 0xFF, HEX);
+  Serial.print("Firmware ver. "); Serial.print((versiondata>>16) & 0xFF, DEC);
+  Serial.print('.'); Serial.println((versiondata>>8) & 0xFF, DEC);
 
   Serial.println("Waiting for an ISO14443A Card ...");
   pinMode(8, OUTPUT);
@@ -89,7 +90,7 @@ void setup(void) {
   lcd.print("#LeagueOfMakers");
   lcd.setCursor(0, 2);
   lcd.print("Starting...");
-  delay(200);
+  delay(500);
 }
 
 
